@@ -3,6 +3,7 @@ import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
+import Basket from './components/basket';
 
 /**
  * Приложение
@@ -15,16 +16,19 @@ function App({store}) {
   const basket = store.getState().basket;
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
-    }, [store]),
-
+    // открываем карзину
     onSelectItem: useCallback((code) => {
       store.selectItem(code);
     }, [store]),
 
+    // добавляем в карзину
     onAddItem: useCallback((item) => {
       store.addItem(item);
+    }, [store]),
+
+    // удаляем из корзины
+    onDeleteItem: useCallback((code) => {
+      store.deleteItem(code);
     }, [store])
   }
 
@@ -33,6 +37,7 @@ function App({store}) {
       <Head title='Магазин'/>
       <Controls onAdd={callbacks.onAddItem} basket={basket} />
       <List list={list} onAdd={callbacks.onAddItem}/>
+      <Basket basket={basket} onDelete={callbacks.onDeleteItem}/>
     </PageLayout>
   );
 }

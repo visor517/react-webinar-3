@@ -44,7 +44,7 @@ class Store {
    * Добавление нового товара в корзину
    */
   addItem(item) {
-    console.log(item)
+    item["quantity"] = 1
     this.setState({
       ...this.state,
       basket: [...this.state.basket, item]
@@ -52,14 +52,14 @@ class Store {
   };
 
   /**
-   * Удаление записи по коду
+   * Удаление товара из корзины
    * @param code
    */
   deleteItem(code) {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
+      basket: this.state.basket.filter(item => item.code !== code)
     })
   };
 
