@@ -41,12 +41,13 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
+   * Добавление нового товара в корзину
    */
-  addItem() {
+  addItem(item) {
+    console.log(item)
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
+      basket: [...this.state.basket, item]
     })
   };
 

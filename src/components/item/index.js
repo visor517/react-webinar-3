@@ -5,19 +5,10 @@ import './style.css';
 
 function Item(props){
 
-  // Счётчик выделений
-  const [count, setCount] = useState(0);
-
   const callbacks = {
-    onClick: () => {
-      props.onSelect(props.item.code);
-      if (!props.item.selected) {
-        setCount(count + 1);
-      }
-    },
-    onDelete: (e) => {
+    onAdd: (e) => {
       e.stopPropagation();
-      props.onDelete(props.item.code);
+      props.onAdd(props.item);
     }
   }
 
@@ -27,7 +18,7 @@ function Item(props){
       <div className='Item-title'>{props.item.title}</div>
       <div className='Item-price'>{props.item.price} ₽</div>
       <div className='Item-actions'>
-        <button onClick={callbacks.onDelete}>Добавить</button>
+        <button onClick={callbacks.onAdd}>Добавить</button>
       </div>
     </div>
   );
@@ -36,17 +27,13 @@ function Item(props){
 Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
-    title: PropTypes.string,
-    selected: PropTypes.bool,
-    count: PropTypes.number
+    title: PropTypes.string
   }).isRequired,
-  onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  onAdd: PropTypes.func
 };
 
 Item.defaultProps = {
-  onDelete: () => {},
-  onSelect: () => {},
+  onAdd: () => {},
 }
 
 export default React.memo(Item);

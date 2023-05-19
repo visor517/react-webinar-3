@@ -23,18 +23,16 @@ function App({store}) {
       store.selectItem(code);
     }, [store]),
 
-    onAddItem: useCallback(() => {
-      store.addItem();
+    onAddItem: useCallback((item) => {
+      store.addItem(item);
     }, [store])
   }
 
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls onAdd={callbacks.onAddItem} basketLen={basket.length} />
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+      <Controls onAdd={callbacks.onAddItem} basket={basket} />
+      <List list={list} onAdd={callbacks.onAddItem}/>
     </PageLayout>
   );
 }
