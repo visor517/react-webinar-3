@@ -1,24 +1,25 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {plural} from "../../utils";
 import './style.css';
 
-function Controls({onAdd, basket}){
+function Controls({onTaggle, basket}){
   let amount = basket.reduce((acc, item) => acc + item.price, 0)
 
   return (
     <div className='Controls'>
       <div className='ControlsStat'>В корзине: <span>{basket.length ? `${basket.length} товаров / ${amount} ₽` : 'пусто'}</span></div>
-      <button onClick={() => onAdd()}>Перейти</button>
+      <button onClick={() => onTaggle()}>Перейти</button>
     </div>
   )
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  onTaggle: PropTypes.func
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
+  onTaggle: () => {}
 }
 
 export default React.memo(Controls);

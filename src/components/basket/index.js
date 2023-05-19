@@ -1,13 +1,16 @@
 import React from "react";
-import Head from "../head";
+import BasketHead from "../basketHead";
 import BasketList from "../basketList";
 import './style.css';
 
-function Basket({basket, onDelete}){
+function Basket({basket, onDelete, basketIsOpened, onTaggle}){
+
   return (
-    <div className='Basket'>
-      <Head title='Корзина'/>
-      <BasketList basket={basket} onDelete={onDelete}/>
+    <div className={'Basket' + (basketIsOpened ? ' Basket_opened' : '')}>
+      <div className='Basket-content'>
+        <BasketHead title='Корзина' onTaggle={onTaggle}/>
+        <BasketList basket={basket} onDelete={onDelete}/>
+      </div>
     </div>
   )
 }

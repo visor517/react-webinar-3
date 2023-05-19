@@ -14,11 +14,12 @@ function App({store}) {
 
   const list = store.getState().list;
   const basket = store.getState().basket;
+  const basketIsOpened = store.getState().basketIsOpened
 
   const callbacks = {
     // открываем карзину
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
+    onTaggleBasket: useCallback(() => {
+      store.taggleBasket();
     }, [store]),
 
     // добавляем в карзину
@@ -35,9 +36,9 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls onAdd={callbacks.onAddItem} basket={basket} />
+      <Controls onTaggle={callbacks.onTaggleBasket} basket={basket} />
       <List list={list} onAdd={callbacks.onAddItem}/>
-      <Basket basket={basket} onDelete={callbacks.onDeleteItem}/>
+      <Basket basket={basket} onDelete={callbacks.onDeleteItem} basketIsOpened={basketIsOpened} onTaggle={callbacks.onTaggleBasket}/>
     </PageLayout>
   );
 }
