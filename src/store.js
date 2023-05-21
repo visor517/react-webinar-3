@@ -46,7 +46,7 @@ class Store {
    */
   addItem(item) {
     let wasInBasket = false
-    let new_basket = this.state.basket.map(element => {
+    let newBasket = this.state.basket.map(element => {
       if (element.code == item.code) {
         wasInBasket = true
         return {...element, quantity: element.quantity + 1}
@@ -55,12 +55,12 @@ class Store {
     });
     if (!wasInBasket) {
       item["quantity"] = 1
-      new_basket.push(item)
+      newBasket.push(item)
     }
 
     this.setState({
       ...this.state,
-      basket: new_basket
+      basket: newBasket
     })
   };
 
