@@ -49,7 +49,7 @@ class Store {
     let new_basket = this.state.basket.map(element => {
       if (element.code == item.code) {
         wasInBasket = true
-        element.quantity ++
+        return {...element, quantity: element.quantity + 1}
       }
       return element
     });
@@ -62,8 +62,6 @@ class Store {
       ...this.state,
       basket: new_basket
     })
-
-    console.log(this.state)
   };
 
   /**
