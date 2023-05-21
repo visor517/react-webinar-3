@@ -4,7 +4,7 @@ import {plural} from "../../utils";
 import './style.css';
 
 function Controls({onTaggle, basket}){
-  let amount = basket.reduce((acc, item) => acc + item.price, 0)
+  let amount = basket.reduce((acc, item) => acc + item.price * item.quantity, 0)
 
   return (
     <div className='Controls'>

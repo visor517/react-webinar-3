@@ -45,11 +45,25 @@ class Store {
    * @param code
    */
   addItem(item) {
-    item["quantity"] = 1
+    let wasInBasket = false
+    let new_basket = this.state.basket.map(element => {
+      if (element.code == item.code) {
+        wasInBasket = true
+        element.quantity ++
+      }
+      return element
+    });
+    if (!wasInBasket) {
+      item["quantity"] = 1
+      new_basket.push(item)
+    }
+
     this.setState({
       ...this.state,
-      basket: [...this.state.basket, item]
+      basket: new_basket
     })
+
+    console.log(this.state)
   };
 
   /**

@@ -1,6 +1,6 @@
 import React from "react";
-import BasketHead from "../basketHead";
-import BasketList from "../basketList";
+import BasketHead from "../basket-head";
+import BasketList from "../basket-list";
 import './style.css';
 
 function Basket({basket, onDelete, basketIsOpened, onTaggle}){
