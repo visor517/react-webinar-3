@@ -15,7 +15,7 @@ function BasketItem(props){
     <div className='BasketItem'>
       <div className='BasketItem-code'>{props.item.code}</div>
       <div className='BasketItem-title'>{props.item.title}</div>
-      <div className='BasketItem-price'>{props.item.price} ₽</div>
+      <div className='BasketItem-price'>{props.item.price.toLocaleString()} ₽</div>
       <div className='BasketItem-quantity'>{props.item.quantity} шт</div>
       <div className='BasketItem-actions'>
         <button onClick={callbacks.onDelete}>Удалить</button>

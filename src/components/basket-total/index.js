@@ -9,7 +9,7 @@ function BasketTotal({basket}){
   return (
     <div className="BasketTotal">
       <div>Итого</div>
-      <div className="BasketTotal-amount">{amount} ₽</div>
+      <div className="BasketTotal-amount">{amount.toLocaleString()} ₽</div>
     </div>
   )
 }

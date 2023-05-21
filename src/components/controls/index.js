@@ -9,7 +9,7 @@ function Controls({onTaggle, basket}){
   return (
     <div className='Controls'>
       <div className='Controls-stat'>
-        В корзине: <span className="Controls-products">{basket.length ? `${basket.length} ${plural(basket.length, {one: 'товар', few: 'товара', many: 'товаров'})} / ${amount} ₽` : 'пусто'}</span>
+        В корзине: <span className="Controls-products">{basket.length ? `${basket.length} ${plural(basket.length, {one: 'товар', few: 'товара', many: 'товаров'})} / ${amount.toLocaleString()} ₽` : 'пусто'}</span>
       </div>
       <button onClick={() => onTaggle()}>Перейти</button>
     </div>
