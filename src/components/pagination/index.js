@@ -14,7 +14,7 @@ function Pagination(props){
         <li>
           <button className={cn("button")} onClick={e => alert()}>1</button>
         </li>
-        <li><span Pagination-skip>...</span></li>
+        <li><span className={cn("skip")}>...</span></li>
         <li>
           <button className={cn("button")} onClick={e => alert()}>2</button>
         </li>
@@ -24,7 +24,7 @@ function Pagination(props){
         <li>
           <button className={cn("button")} onClick={e => alert()}>4</button>
         </li>
-        <li><span Pagination-skip>...</span></li>
+        <li><span className={cn("skip")}>...</span></li>
         <li>
           <button className={cn("button")} onClick={e => alert()}>5</button>
         </li>
