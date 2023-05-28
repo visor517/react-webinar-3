@@ -21,7 +21,7 @@ function Main() {
 
   useEffect(() => {
     store.actions.catalog.load();
-  }, [store.state.page]);
+  }, [store.state.page.skip]);
 
   const callbacks = {
     // Добавление в корзину
