@@ -6,7 +6,7 @@ class Page extends StoreModule {
     return {
       limit: 10,
       skip: 0,
-      count: 50
+      count: 550
     }
   }
 
