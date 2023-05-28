@@ -30,6 +30,8 @@ function Product() {
       }));
 
     const callbacks = {
+        // Добавляем товар
+        addToBasket: useCallback(() => store.actions.basket.addToBasket(productId), [store]),
         // Открытие модалки корзины
         openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
       }
@@ -46,8 +48,7 @@ function Product() {
             <Head title={product.title}/>
             <div style={{'display': 'flex', 'justifyContent': 'space-between'}}>
                 <Link to={'/'} style={{'padding': '20px'}}>Главная</Link>
-                <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                    sum={select.sum} navigation={"Главная"}/>
+                <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} navigation={"Главная"}/>
             </div>
             <div className='Product_content' style={{'padding': '20px'}}>
                 <p>{product.description}</p>
@@ -55,6 +56,7 @@ function Product() {
                 <p>Категория: <span className='Product_content__bold'>{product.category.title}</span></p>
                 <p>Год выпуска: <span className='Product_content__bold'>{product.edition}</span></p>
                 <p className='Product_content__high Product_content__bold'>Цена: {product.price}</p>
+                <button onClick={callbacks.addToBasket}>Добавить</button>
             </div>
         </PageLayout>
     );

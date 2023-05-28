@@ -38,8 +38,7 @@ function Main() {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
       <Pagination/>
     </PageLayout>
