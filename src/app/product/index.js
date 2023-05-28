@@ -13,11 +13,10 @@ function Product() {
     const productId = params.id;
 
     const [product, setProduct] = useState({
-        title: "Название товара",
-        description: "Описание товара",
+        title: null,
+        description: null,
         madeIn: {'title': null, 'code': null},
         category: {'title': null},
-        price: 0
     });
         
     useEffect(() => {loadProduct(productId)}, [])
