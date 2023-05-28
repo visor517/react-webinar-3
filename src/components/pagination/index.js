@@ -1,30 +1,13 @@
 import {memo, useCallback, useEffect} from "react";
 import {cn as bem} from '@bem-react/classname';
-import useStore from "../../store/use-store";
-import useSelector from "../../store/use-selector";
 import './style.css';
 
-function Pagination(){
-
-  const store = useStore();
-
-  const select = useSelector(state => ({
-    page: state.page,
-  }));
+function Pagination({page, toPage}){
 
   const cn = bem('Pagination');
 
-  useEffect(() => {
-    store.actions.catalog.load();
-  }, [store.page]);
-
-  const callbacks = {
-    // Добавление в корзину
-    toPage: useCallback(_id => store.actions.page.changePage(_id), [store])
-  }
-
-  const lastPageNum = Math.ceil(select.page.count / select.page.limit)
-  const curPage = Math.round((select.page.skip + select.page.limit) / select.page.limit)
+  const lastPageNum = Math.ceil(page.count / page.limit)
+  const curPage = Math.round((page.skip + page.limit) / page.limit)
   
   let navTemplate = null
   if (lastPageNum <= 5) {
@@ -35,6 +18,9 @@ function Pagination(){
   }
   else if (curPage == 3) {
     navTemplate = [1, 2, 3, 4, 'skip', lastPageNum]
+  }
+  else if (lastPageNum - curPage <= 2) {
+    navTemplate = [1, 'skip', lastPageNum - 3, lastPageNum - 2, lastPageNum - 1, lastPageNum]
   }
   else {
     navTemplate = [1, 'skip', curPage - 1, curPage, curPage + 1, 'skip', lastPageNum]
@@ -51,24 +37,14 @@ function Pagination(){
             return (
             <li key={i}>
               <button className={"Pagination-button" + (pageNum == curPage ? " Pagination-button_selected" : "")}
-               onClick={e => callbacks.toPage(pageNum)}>{pageNum}</button>
+               onClick={e => toPage(pageNum)}>{pageNum}</button>
             </li>
             )
           }
         })}
-        
       </ul>
     </nav>
   );
 }
-
-// Pagination.propTypes = {
-//   item: PropTypes.shape({
-//     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     title: PropTypes.string,
-//     price: PropTypes.number
-//   }).isRequired,
-//   onAdd: PropTypes.func,
-// };
 
 export default memo(Pagination);

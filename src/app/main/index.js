@@ -28,6 +28,8 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    // Переключение страницы
+    toPage: useCallback(_id => store.actions.page.changePage(_id), [store])
   }
 
   const renders = {
@@ -41,9 +43,8 @@ function Main() {
       <Head title='Магазин'/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
-      <Pagination/>
+      <Pagination page={select.page} toPage={callbacks.toPage} />
     </PageLayout>
-
   );
 }
 
