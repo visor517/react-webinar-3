@@ -5,6 +5,7 @@ import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import './style.css';
 
 function Product() {
 
@@ -14,6 +15,8 @@ function Product() {
     const [product, setProduct] = useState({
         title: "Название товара",
         description: "Описание товара",
+        madeIn: {'title': null, 'code': null},
+        category: {'title': null},
         price: 0
     });
         
@@ -32,7 +35,7 @@ function Product() {
       }
 
     async function loadProduct(productId) {
-        const response = await fetch('/api/v1/articles/' + productId);
+        const response = await fetch('/api/v1/articles/' + productId + '/?fields=*,madeIn(title,code),category(title)');
         const json = await response.json();
         console.log(json["result"])
         setProduct(json["result"]);
@@ -46,9 +49,12 @@ function Product() {
                 <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum} navigation={"Главная"}/>
             </div>
-            <div style={{'padding': '20px'}}>
+            <div className='Product_content' style={{'padding': '20px'}}>
                 <p>{product.description}</p>
-                <p>Цена: {product.price}</p>
+                <p>Страна производитель: <span className='Product_content__bold'>{product.madeIn.title} ({product.madeIn.code})</span></p>
+                <p>Категория: <span className='Product_content__bold'>{product.category.title}</span></p>
+                <p>Год выпуска: <span className='Product_content__bold'>{product.edition}</span></p>
+                <p className='Product_content__high Product_content__bold'>Цена: {product.price}</p>
             </div>
         </PageLayout>
     );

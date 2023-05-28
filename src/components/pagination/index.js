@@ -12,7 +12,7 @@ function Pagination(props){
     <nav className={cn()}>
       <ul>
         <li>
-          <button className={cn("button")} onClick={e => alert()}>1</button>
+          <button className={"Pagination-button Pagination-button_selected"} onClick={e => alert()}>1</button>
         </li>
         <li><span className={cn("skip")}>...</span></li>
         <li>
