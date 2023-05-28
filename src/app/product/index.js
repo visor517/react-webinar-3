@@ -39,7 +39,6 @@ function Product() {
     async function loadProduct(productId) {
         const response = await fetch('/api/v1/articles/' + productId + '/?fields=*,madeIn(title,code),category(title)');
         const json = await response.json();
-        console.log(json["result"])
         setProduct(json["result"]);
     }
 

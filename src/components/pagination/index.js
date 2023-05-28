@@ -1,32 +1,43 @@
-import {memo, useState} from "react";
-import PropTypes from "prop-types";
+import {memo, useCallback} from "react";
 import {cn as bem} from '@bem-react/classname';
-import {numberFormat} from "../../utils";
+import useStore from "../../store/use-store";
+import useSelector from "../../store/use-selector";
 import './style.css';
 
-function Pagination(props){
+function Pagination(){
+
+  const store = useStore();
+
+  const select = useSelector(state => ({
+    page: state.page,
+  }));
 
   const cn = bem('Pagination');
+
+  const callbacks = {
+    // Добавление в корзину
+    toPage: useCallback(_id => store.actions.page.changePage(_id), [store])
+  }
 
   return (
     <nav className={cn()}>
       <ul>
         <li>
-          <button className={"Pagination-button Pagination-button_selected"} onClick={e => alert()}>1</button>
+          <button className={"Pagination-button Pagination-button_selected"} onClick={e => callbacks.toPage(1)}>1</button>
         </li>
         <li><span className={cn("skip")}>...</span></li>
         <li>
-          <button className={cn("button")} onClick={e => alert()}>2</button>
+          <button className={cn("button")} onClick={e => callbacks.toPage(2)}>2</button>
         </li>
         <li>
-          <button className={cn("button")} onClick={e => alert()}>3</button>
+          <button className={cn("button")} onClick={e => callbacks.toPage(3)}>3</button>
         </li>
         <li>
-          <button className={cn("button")} onClick={e => alert()}>4</button>
+          <button className={cn("button")} onClick={e => callbacks.toPage(4)}>4</button>
         </li>
         <li><span className={cn("skip")}>...</span></li>
         <li>
-          <button className={cn("button")} onClick={e => alert()}>5</button>
+          <button className={cn("button")} onClick={e => callbacks.toPage(5)}>5</button>
         </li>
       </ul>
     </nav>

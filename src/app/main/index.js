@@ -12,15 +12,16 @@ function Main() {
 
   const store = useStore();
 
-  useEffect(() => {
-    store.actions.catalog.load();
-  }, []);
-
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
+    page: state.page
   }));
+
+  useEffect(() => {
+    store.actions.catalog.load();
+  }, [store.state.page]);
 
   const callbacks = {
     // Добавление в корзину
